@@ -61,3 +61,4 @@ Para selecionar todas as palavras: seleciona uma palavra desejada e pressiona Ct
 div>ul>li>*4
 
 Soft Deletes
+*/
