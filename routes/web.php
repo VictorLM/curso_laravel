@@ -61,4 +61,28 @@ Para selecionar todas as palavras: seleciona uma palavra desejada e pressiona Ct
 div>ul>li>*4
 
 Soft Deletes
+
+RELACIONAMENTOS:
+HAS ONE/UM PRA UM:
+Tabela Clientes tem um campo id
+Tabela Enderecos tem um campo estrangeiro cliente_id
+No model Cliente:
+public function endereco(){
+    return $this->hasOne('App\Endereco');
+}
+
+BELONGS TO/PERTENCE A:
+No model Endereco:
+function categoria(){
+    return $this->belongsTo('App\Cliente');
+}
+
+$c = new Cliente();
+// seta atributos
+$c->save();
+
+$e = new Endereco();
+// seta atributos
+$c->endereco()->save($e);
+
 */
