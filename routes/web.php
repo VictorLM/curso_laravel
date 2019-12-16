@@ -29,6 +29,10 @@ Route::get('/produtos/apagar/{id}', 'ControladorProduto@destroy');
 Route::get('/produtos/editar/{id}', 'ControladorProduto@edit');
 Route::post('/produtos/editar/{id}', 'ControladorProduto@update');
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 
 //Parametro opcional = rota/{$param?}
 
@@ -84,5 +88,55 @@ $c->save();
 $e = new Endereco();
 // seta atributos
 $c->endereco()->save($e);
+
+Salvar associação relacionamento quando o relacionamento está estanciado
+$produto->categoria()->associate($categoria);
+$categoria precisa ser um obj já salvo
+Para desassociar:
+$produto->categoria()->dissociate();
+
+função de objeto ->load() atualiza a listagem de relacionamentos
+Ex: $produtos = Produtos::with("categorias")->get();
+////code
+$produtos->load("categorias");
+
+muitos pra muitos - quando tem uma tabela no meio, que tem os relacionamentos
+
+belongsToMany() Quando um objeto pertence a varios outros
+
+class Desenvolvedor extends Model {
+    function projetos(){
+        return $this->belongsToMany("App\Projeto", "alocacoes")->withPivot("nome_campo_tabela_pivot"); 
+        //tabela alocações onde tem os relacionamentos dev > projeto
+        //função ->withPivot(""); retorna dados da tabela intermediária de relacionamento
+    }
+}
+
+Função attach para vincular relacionamentos muitos para muitos
+
+$projeto = Projeto::find(4);
+$projeto->desenvolvedores()->attach(1, ['horas_semanais', => 50]);
+//1 é o ID dev
+
+Função detach para desvincular relacionamentos muitos para muitos
+$projeto->desenvolvedores()->detach(1);
+
+Dá pra passar parâmetros para os middleares
+
+Auth::check() checa se user está logado
+
+Dentro da view:
+@auth
+@endauth
+
+@guest
+@endguest
+
+JQuery para carregar funções após o carregamento completo da página:
+$(function(){
+    funcao();
+});
+
+
 
 */
