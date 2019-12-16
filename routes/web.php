@@ -137,6 +137,69 @@ $(function(){
     funcao();
 });
 
+php artisan storage:link
+//faz um link simbólico na pasta public
+
+filesystems.php //onde seta os drivers de armazenamento
+
+$path = $request->file('nomecampo')->store->('pasta', 'driver');
+
+Eventos e Listeners- Sessão 22, aula 229
+
+App\Providers\EventServiceProvider
+App\Events
+App\Listeners
+
+php artisan make:event
+php artisan make:listener
+php artisan event:generate
+
+use App\Events\NomeEvent;
+
+event(new HomeEvent($param));
+
+Mailable:
+
+php artisan make:mail Nome
+
+App\Mail
+
+Mail::to($user)->send(new NomeMailable($param));
+
+<img src="{{ $message->embed ( public_path() . 'img/nome.png' )}}>
+
+public_path()
+base_path()
+
+Queue - Só da pra fazer com Redis?
+
+Mail::to($user)->queue(new NomeMailable($param));
+//$user contain ->name e ->email
+
+Tem que deixar rodando o php artisan queue:work
+
+Para postergar
+Mail::to($user)->later($quando, new NomeMailable($param));
+
+Monitorar eventos e filas com Horizon
+
+composer require laravel/horizon
+php artisan horizon:install
+php artisan horizon
+
+APIS
+
+composer require laravel/passport
+php artisan passport:install
+
+Confirmação e-mail ao registrar um novo usuário
+Sessão 24, aulas 249, 250. 251
+
+Helpers:
+now() = Carbon::now()
+url() = url do .ENV
+public_path() = path pasta public
+base_path() = path projeto
 
 
 */
